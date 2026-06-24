@@ -30,13 +30,14 @@ cd "$(dirname "$0")/.."
 <body>
 <div class="wrap">
 <h1>Mockups</h1>
-<p class="sub">Prototipi generati con Claude Code · ulivs-app</p>
+<p class="sub">Prototipi · ulivs-app</p>
 <div class="grid">
 HEAD
 
   found=0
   for f in *.html; do
     [ "$f" = "index.html" ] && continue
+    case "$f" in *.dc.html) continue;; esac  # componenti dc-import, non mockup a sé
     [ -e "$f" ] || continue
     found=1
     name="${f%.html}"

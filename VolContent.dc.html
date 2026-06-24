@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Rubik:ital,wght@1,700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: "Instrument Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif; -webkit-font-smoothing: antialiased; color: #2c3033; }
+  .gs-tip-box { position:absolute; bottom:calc(100% + 9px); left:50%; transform:translateX(-50%); width:248px; background:#1f2a37; color:#fff; font-size:11.5px; font-weight:500; line-height:1.45; padding:9px 11px; border-radius:7px; opacity:0; visibility:hidden; transition:opacity .14s ease; z-index:60; box-shadow:0 8px 24px rgba(0,0,0,.22); pointer-events:none; text-align:left; white-space:normal; }
+  .gs-tip-box::after { content:""; position:absolute; top:100%; left:50%; transform:translateX(-50%); border:6px solid transparent; border-top-color:#1f2a37; }
+  .gs-tip:hover .gs-tip-box { opacity:1; visibility:visible; }
+</style>
+<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+</helmet>
+
+<div style="font-family:inherit;">
+
+  <!-- ===== DASHBOARD ===== -->
+  <sc-if value="{{ isDash }}" hint-placeholder-val="{{ true }}">
+    <h1 style="font-size:30px; font-weight:800; margin:0 0 26px; letter-spacing:-.02em;">Ciao, Luke Skywalker!</h1>
+    <div style="background:#e6f1fa; border-radius:10px; padding:24px 26px; margin-bottom:26px;">
+      <div style="font-size:18px; font-weight:700; margin-bottom:10px;">Luke Skywalker, ti accogliamo in GestiSCU 🎉</div>
+      <div style="font-size:14px; color:#56606a; line-height:1.55;">Questa è la tua homepage. Se hai bisogno di assistenza puoi contattarci cliccando sul pulsante "?" in alto a destra.</div>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(244px,1fr)); gap:18px; margin-bottom:14px;">
+      <div style="border:1px solid #cfdbe5; border-radius:10px; padding:20px 22px;"><div style="display:flex; align-items:center; gap:13px; margin-bottom:18px;"><div style="width:40px; height:40px; border-radius:8px; background:#e6f1fa; display:flex; align-items:center; justify-content:center;"><iconify-icon icon="tabler:calendar-star" style="font-size:21px; color:#34a0f3;"></iconify-icon></div><div style="font-size:15px; font-weight:600; color:#2a2f35;">Giorni di malattia</div></div><div style="display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:12px;"><div style="font-size:34px; font-weight:800; letter-spacing:-.02em;">14</div><div style="font-size:13px; color:#9aa0a7;">su 30 totali</div></div><div style="position:relative; padding-bottom:17px;"><div style="height:6px; border-radius:6px; background:#eef0f3; overflow:hidden;"><div style="height:100%; width:47%; background:#e05a4f; border-radius:6px;"></div></div><div title="Fino a 15 giorni i giorni di malattia sono retribuiti" style="position:absolute; top:-3px; left:50%; width:2px; height:12px; background:#2a2f35; border-radius:2px;"></div><div style="position:absolute; bottom:0; left:50%; transform:translateX(-50%); font-size:10px; font-weight:600; color:#56606a; white-space:nowrap;">retribuiti fino a 15 gg</div></div></div>
+      <div style="border:1px solid #cfdbe5; border-radius:10px; padding:20px 22px;"><div style="display:flex; align-items:center; gap:13px; margin-bottom:18px;"><div style="width:40px; height:40px; border-radius:8px; background:#e6f1fa; display:flex; align-items:center; justify-content:center;"><iconify-icon icon="tabler:beach" style="font-size:21px; color:#34a0f3;"></iconify-icon></div><div style="font-size:15px; font-weight:600; color:#2a2f35;">Permessi usufruiti</div></div><div style="display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:12px;"><div style="font-size:34px; font-weight:800; letter-spacing:-.02em;">15</div><div style="font-size:13px; color:#9aa0a7;">su 20 totali</div></div><div style="height:6px; border-radius:6px; background:#eef0f3; overflow:hidden;"><div style="height:100%; width:75%; background:#9aa0a7; border-radius:6px;"></div></div></div>
+      <div style="border:1px solid #cfdbe5; border-radius:10px; padding:20px 22px;"><div style="display:flex; align-items:center; gap:13px; margin-bottom:18px;"><div style="width:40px; height:40px; border-radius:8px; background:#e6f1fa; display:flex; align-items:center; justify-content:center;"><iconify-icon icon="tabler:calendar-star" style="font-size:21px; color:#34a0f3;"></iconify-icon></div><div style="font-size:15px; font-weight:600; color:#2a2f35; line-height:1.25;">Perm. straordinari con limitazione di fruizione</div></div><div style="display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:12px;"><div style="font-size:34px; font-weight:800; letter-spacing:-.02em;">6</div><div style="font-size:13px; color:#9aa0a7;">su 15 totali</div></div><div style="height:6px; border-radius:6px; background:#eef0f3; overflow:hidden;"><div style="height:100%; width:40%; background:#34a0f3; border-radius:6px;"></div></div></div>
+    </div>
+    <div style="margin-bottom:24px;">
+      <div style="text-align:right;"><span onClick="{{ toggleDett }}" style="font-size:13px; color:#34a0f3; font-weight:600; cursor:pointer;">Dettagli Permessi Straordinari {{ dettChevron }}</span></div>
+      <sc-if value="{{ dettOpen }}" hint-placeholder-val="{{ false }}">
+        <div style="border:1px solid #cfdbe5; border-radius:8px; overflow:hidden; margin-top:12px;">
+          <div style="padding:12px 18px; background:#f7f8fa; font-weight:700; font-size:12.5px; border-bottom:1px solid #e6edf2;">Permessi Straordinari con limitazione di fruizione</div>
+          <div style="display:flex; justify-content:space-between; padding:11px 18px; border-bottom:1px solid #f0f4f7; font-size:13.5px;"><span>Visita medica specialistica</span><b>0/2</b></div>
+          <div style="display:flex; justify-content:space-between; padding:11px 18px; border-bottom:1px solid #f0f4f7; font-size:13.5px;"><span>Esame universitario</span><b>6</b></div>
+          <div style="display:flex; justify-content:space-between; padding:11px 18px; border-bottom:1px solid #f0f4f7; font-size:13.5px;"><span>Partecipazione a concorso pubblico</span><b style="color:#c98a17;">4/5</b></div>
+          <div style="display:flex; justify-content:space-between; padding:11px 18px; font-size:13.5px;"><span>Matrimonio</span><b>0</b></div>
+        </div>
+      </sc-if>
+    </div>
+    <div style="border:1px solid #cfdbe5; border-radius:10px; padding:20px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:18px; flex-wrap:wrap;">
+      <div style="font-size:15px; font-weight:600;">Documenti d'Avvio</div>
+      <button onClick="{{ openDocs }}" style="border:1px solid #dde2e7; background:#fff; color:#2a2f35; font-size:13px; font-weight:600; padding:10px 18px; border-radius:8px; cursor:pointer;" style-hover="background:#f5f7f9;">Carica Documenti d'Avvio</button>
+    </div>
+    <div style="border:1px solid #cfdbe5; border-radius:10px; padding:20px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:18px; flex-wrap:wrap;">
+      <div style="min-width:0;">
+        <div style="font-size:15px; font-weight:600; display:flex; align-items:center; gap:9px;">Registro Presenze <span style="{{ regBadge }}">{{ regBadgeText }}</span></div>
+        <div style="font-size:13px; color:#8a9099; margin-top:5px;">Carica il registro firmato del mese in corso (Giugno 2026) in PDF.</div>
+      </div>
+      <button onClick="{{ openReg }}" style="border:1px solid #dde2e7; background:#fff; color:#2a2f35; font-size:13px; font-weight:600; padding:10px 18px; border-radius:8px; cursor:pointer; white-space:nowrap;" style-hover="background:#f5f7f9;">Carica Registro Presenze</button>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:18px;">
+      <div style="border:1px solid #cfdbe5; border-radius:10px; padding:20px 24px;"><div style="display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:10px;"><div style="font-size:13px; color:#8a9099;">Il tuo progetto</div><button style="border:1px solid #c6d2db; background:#fff; color:#2a2f35; font-size:13px; font-weight:600; padding:8px 16px; border-radius:6px; cursor:pointer;">Scarica Progetto</button></div><div style="font-size:21px; font-weight:800;">Prove di Volo</div></div>
+      <div style="border:1px solid #cfdbe5; border-radius:10px; padding:20px 24px;"><div style="font-size:13px; color:#8a9099; margin-bottom:10px;">La tua sede</div><div style="font-size:21px; font-weight:800;">Biblioteca Coruscant</div></div>
+    </div>
+  </sc-if>
+
+  <!-- ===== REGISTRO PRESENZE ===== -->
+  <sc-if value="{{ isReg }}" hint-placeholder-val="{{ false }}">
+    <h1 style="font-size:30px; font-weight:800; margin:0 0 8px; letter-spacing:-.02em;">Registro Presenze</h1>
+    <div style="font-size:14px; color:#56606a; line-height:1.55; margin-bottom:26px; max-width:640px;">Carica ogni mese il registro delle presenze firmato in formato PDF. Insieme puoi allegare, facoltativamente, il registro di compresenza dell'OLP.</div>
+    <div style="display:flex; flex-direction:column; gap:12px;">
+      <div style="border:1px solid #cfdbe5; border-radius:10px; padding:16px 18px; display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap;">
+        <div style="display:flex; align-items:center; gap:13px;"><div style="width:40px; height:40px; border-radius:8px; background:#e6f1fa; display:flex; align-items:center; justify-content:center;"><iconify-icon icon="tabler:calendar-month" style="font-size:21px; color:#34a0f3;"></iconify-icon></div><div><div style="font-size:15px; font-weight:700;">Giugno 2026</div><div style="font-size:12.5px; color:#8a9099; margin-top:2px;">Mese in corso</div></div></div>
+        <div style="display:flex; align-items:center; gap:12px;"><span style="{{ regBadge }}">{{ regBadgeText }}</span><button onClick="{{ openReg }}" style="border:1px solid #dde2e7; background:#fff; color:#2a2f35; font-size:13px; font-weight:600; padding:9px 16px; border-radius:8px; cursor:pointer;" style-hover="background:#f5f7f9;">{{ regBtnText }}</button></div>
+      </div>
+      <div style="border:1px solid #cfdbe5; border-radius:10px; padding:16px 18px; display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap;">
+        <div style="display:flex; align-items:center; gap:13px;"><div style="width:40px; height:40px; border-radius:8px; background:#e6f1fa; display:flex; align-items:center; justify-content:center;"><iconify-icon icon="tabler:file-type-pdf" style="font-size:21px; color:#34a0f3;"></iconify-icon></div><div><div style="font-size:15px; font-weight:700;">Maggio 2026</div><div style="font-size:12.5px; color:#8a9099; margin-top:2px;">registro_presenze_maggio2026.pdf</div></div></div>
+        <div style="display:flex; align-items:center; gap:12px;"><span style="font-size:11px; font-weight:700; padding:3px 9px; border-radius:20px; background:#e0f3ea; color:#1c8f5a;">Caricato</span><button onClick="{{ repMaggio }}" style="border:1px solid #dde2e7; background:#fff; color:#2a2f35; font-size:13px; font-weight:600; padding:9px 16px; border-radius:8px; cursor:pointer;" style-hover="background:#f5f7f9;">Sostituisci</button></div>
+      </div>
+      <div style="border:1px solid #cfdbe5; border-radius:10px; padding:16px 18px; display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap;">
+        <div style="display:flex; align-items:center; gap:13px;"><div style="width:40px; height:40px; border-radius:8px; background:#e6f1fa; display:flex; align-items:center; justify-content:center;"><iconify-icon icon="tabler:file-type-pdf" style="font-size:21px; color:#34a0f3;"></iconify-icon></div><div><div style="font-size:15px; font-weight:700;">Aprile 2026</div><div style="font-size:12.5px; color:#8a9099; margin-top:2px;">registro_presenze_aprile2026.pdf</div></div></div>
+        <div style="display:flex; align-items:center; gap:12px;"><span style="font-size:11px; font-weight:700; padding:3px 9px; border-radius:20px; background:#e0f3ea; color:#1c8f5a;">Caricato</span><button onClick="{{ repAprile }}" style="border:1px solid #dde2e7; background:#fff; color:#2a2f35; font-size:13px; font-weight:600; padding:9px 16px; border-radius:8px; cursor:pointer;" style-hover="background:#f5f7f9;">Sostituisci</button></div>
+      </div>
+      <div style="border:1px solid #cfdbe5; border-radius:10px; padding:16px 18px; display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap;">
+        <div style="display:flex; align-items:center; gap:13px;"><div style="width:40px; height:40px; border-radius:8px; background:#e6f1fa; display:flex; align-items:center; justify-content:center;"><iconify-icon icon="tabler:file-type-pdf" style="font-size:21px; color:#34a0f3;"></iconify-icon></div><div><div style="font-size:15px; font-weight:700;">Marzo 2026</div><div style="font-size:12.5px; color:#8a9099; margin-top:2px;">registro_presenze_marzo2026.pdf</div></div></div>
+        <div style="display:flex; align-items:center; gap:12px;"><span style="font-size:11px; font-weight:700; padding:3px 9px; border-radius:20px; background:#e0f3ea; color:#1c8f5a;">Caricato</span><button onClick="{{ repMarzo }}" style="border:1px solid #dde2e7; background:#fff; color:#2a2f35; font-size:13px; font-weight:600; padding:9px 16px; border-radius:8px; cursor:pointer;" style-hover="background:#f5f7f9;">Sostituisci</button></div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ===== LE MIE ASSENZE ===== -->
+  <sc-if value="{{ isAss }}" hint-placeholder-val="{{ false }}">
+    <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:16px; position:relative; margin:0 0 8px;">
+      <h1 style="font-size:30px; font-weight:800; margin:0; letter-spacing:-.02em;">Le mie Assenze</h1>
+      <span style="position:relative; flex-shrink:0;">
+        <button onClick="{{ toggleNuova }}" style="background:#34a0f3; color:#fff; border:none; font-size:14px; font-weight:600; padding:11px 20px; border-radius:6px; cursor:pointer; white-space:nowrap;" style-hover="background:#2b8fe0;">Inserisci Assenza</button>
+        <sc-if value="{{ nuovaOpen }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute; top:48px; right:0; width:264px; background:#fff; border:1px solid #e7eaee; border-radius:8px; box-shadow:0 16px 40px rgba(0,0,0,.16); padding:7px; z-index:30;">
+            <div onClick="{{ nuovaMalattia }}" style="padding:11px 13px; font-size:14px; color:#3a4047; border-radius:7px; cursor:pointer;" style-hover="background:#f5f7f9;">Malattia</div>
+            <div onClick="{{ nuovaPermesso }}" style="padding:11px 13px; font-size:14px; color:#3a4047; border-radius:7px; cursor:pointer;" style-hover="background:#f5f7f9;">Permesso</div>
+            <div onClick="{{ nuovaStraord }}" style="padding:11px 13px; font-size:14px; color:#3a4047; border-radius:7px; cursor:pointer;" style-hover="background:#f5f7f9;">Permesso Straordinario</div>
+            <div onClick="{{ nuovaIngiust }}" style="padding:11px 13px; font-size:14px; color:#3a4047; border-radius:7px; cursor:pointer;" style-hover="background:#f5f7f9;">Permesso per Assenza Ingiustificata</div>
+            <div onClick="{{ nuovaInfortunio }}" style="padding:11px 13px; font-size:14px; color:#3a4047; border-radius:7px; cursor:pointer;" style-hover="background:#f5f7f9;">Infortunio</div>
+          </div>
+        </sc-if>
+      </span>
+    </div>
+    <div style="font-size:14px; color:#56606a; line-height:1.55; margin-bottom:22px; max-width:640px;">Elenco delle tue assenze e permessi. Dove compare "Documento mancante" ricordati di caricare il giustificativo.</div>
+    <div style="font-size:13px; color:#3a4047; font-weight:600; margin-bottom:14px;">31 risultati <span style="color:#9aa0a7; font-weight:400;">su 31 totali</span></div>
+    <div style="display:flex; flex-direction:column; gap:11px;">
+      <div style="border:1px solid #f0d9a8; background:#fffdf6; border-radius:10px; padding:15px 17px; display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:nowrap;">
+        <div style="min-width:0; flex:1;"><div style="font-size:15px; font-weight:700;">Permesso Straordinario</div><div style="font-size:13px; color:#56606a; margin-top:3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">12 Giugno 2026 · Donazione di emocomponenti (piastrine)</div></div>
+        <div style="display:flex; align-items:center; gap:11px; flex-shrink:0;"><span class="gs-tip" style="position:relative; display:inline-flex; align-items:center; background:#fceedb; color:#9c6a1b; font-size:11.5px; font-weight:600; padding:4px 9px; border-radius:7px; cursor:help; white-space:nowrap;">Avviso limite superato<span class="gs-tip-box">Non è passato un periodo di tempo sufficiente dall'ultima volta che hai preso un permesso straordinario con questa motivazione.</span></span><span style="width:20px; height:20px; border-radius:50%; background:#f5c14e; color:#fff; font-size:13px; display:inline-flex; align-items:center; justify-content:center;">–</span><button onClick="{{ openGiust }}" style="border:1px solid #34a0f3; background:#fff; color:#34a0f3; font-size:12.5px; font-weight:600; padding:7px 13px; border-radius:8px; cursor:pointer; white-space:nowrap;">Carica documento</button></div>
+      </div>
+      <div style="border:1px solid #f0d9a8; background:#fffdf6; border-radius:10px; padding:15px 17px; display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap;">
+        <div style="min-width:160px;"><div style="font-size:15px; font-weight:700;">Permesso Straordinario</div><div style="font-size:13px; color:#56606a; margin-top:3px;">20 Maggio 2026 · Donazione di emocomponenti</div></div>
+        <div style="display:flex; align-items:center; gap:11px;"><span style="background:#fceedb; color:#9c6a1b; font-size:11.5px; font-weight:600; padding:4px 9px; border-radius:7px;">Documento mancante</span><span style="width:20px; height:20px; border-radius:50%; background:#f5c14e; color:#fff; font-size:13px; display:inline-flex; align-items:center; justify-content:center;">–</span><button onClick="{{ openGiust }}" style="border:1px solid #34a0f3; background:#fff; color:#34a0f3; font-size:12.5px; font-weight:600; padding:7px 13px; border-radius:8px; cursor:pointer;">Carica documento</button></div>
+      </div>
+      <div style="border:1px solid #cfdbe5; border-radius:10px; padding:15px 17px; display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap;">
+        <div style="min-width:160px;"><div style="font-size:15px; font-weight:700;">Permesso</div><div style="font-size:13px; color:#56606a; margin-top:3px;">20 Giugno 2025</div></div>
+        <div style="display:flex; align-items:center; gap:11px;"><span style="width:20px; height:20px; border-radius:50%; background:#e0f3ea; color:#1c8f5a; font-size:12px; display:inline-flex; align-items:center; justify-content:center;">✓</span></div>
+      </div>
+      <div style="border:1px solid #cfdbe5; border-radius:10px; padding:15px 17px; display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap;">
+        <div style="min-width:160px;"><div style="font-size:15px; font-weight:700;">Permesso Straordinario</div><div style="font-size:13px; color:#56606a; margin-top:3px;">19 Luglio 2025 · Donazione di emocomponenti (piastrine)</div></div>
+        <div style="display:flex; align-items:center; gap:11px;"><span style="width:20px; height:20px; border-radius:50%; background:#e0f3ea; color:#1c8f5a; font-size:12px; display:inline-flex; align-items:center; justify-content:center;">✓</span></div>
+      </div>
+      <div style="border:1px solid #cfdbe5; border-radius:10px; padding:15px 17px; display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap;">
+        <div style="min-width:160px;"><div style="font-size:15px; font-weight:700;">Malattia</div><div style="font-size:13px; color:#56606a; margin-top:3px;">27 Agosto 2025 · Malattia</div></div>
+        <div style="display:flex; align-items:center; gap:11px;"><span style="width:20px; height:20px; border-radius:50%; background:#e0f3ea; color:#1c8f5a; font-size:12px; display:inline-flex; align-items:center; justify-content:center;">✓</span></div>
+      </div>
+      <div style="border:1px solid #cfdbe5; border-radius:10px; padding:15px 17px; display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap;">
+        <div style="min-width:160px;"><div style="font-size:15px; font-weight:700;">Permesso per Assenza Ingiustificata</div><div style="font-size:13px; color:#56606a; margin-top:3px;">04 - 05 Settembre 2025</div></div>
+        <div style="display:flex; align-items:center; gap:11px;"><span style="width:20px; height:20px; border-radius:50%; background:#e0f3ea; color:#1c8f5a; font-size:12px; display:inline-flex; align-items:center; justify-content:center;">✓</span></div>
+      </div>
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1000, &quot;height&quot;: 700}, &quot;screen&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;dashboard&quot;, &quot;registro&quot;, &quot;assenze&quot;], &quot;default&quot;: &quot;dashboard&quot;, &quot;tsType&quot;: &quot;string&quot;}, &quot;regMese&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: false, &quot;tsType&quot;: &quot;boolean&quot;}, &quot;onOpenDocs&quot;: {&quot;editor&quot;: null, &quot;tsType&quot;: &quot;() =&gt; void&quot;}, &quot;onOpenRegistro&quot;: {&quot;editor&quot;: null, &quot;tsType&quot;: &quot;() =&gt; void&quot;}, &quot;onOpenGiustificativo&quot;: {&quot;editor&quot;: null, &quot;tsType&quot;: &quot;() =&gt; void&quot;}, &quot;onReplaceRegistro&quot;: {&quot;editor&quot;: null, &quot;tsType&quot;: &quot;(month: string, filename: string) =&gt; void&quot;}, &quot;onNuovaAssenza&quot;: {&quot;editor&quot;: null, &quot;tsType&quot;: &quot;(type: string) =&gt; void&quot;}}">
+class Component extends DCLogic {
+  state = { dettOpen: false, nuovaOpen: false };
+  renderVals() {
+    const p = this.props || {};
+    const screen = p.screen || 'dashboard';
+    const reg = !!p.regMese;
+    const nuova = (type) => {
+      this.setState({ nuovaOpen: false });
+      (p.onNuovaAssenza || (() => {}))(type);
+    };
+    return {
+      nuovaOpen: this.state.nuovaOpen,
+      toggleNuova: () => this.setState(s => ({ nuovaOpen: !s.nuovaOpen })),
+      nuovaMalattia: () => nuova('Malattia'),
+      nuovaPermesso: () => nuova('Permesso'),
+      nuovaStraord: () => nuova('Permesso Straordinario'),
+      nuovaIngiust: () => nuova('Permesso per Assenza Ingiustificata'),
+      nuovaInfortunio: () => nuova('Infortunio'),
+      isDash: screen === 'dashboard',
+      isReg: screen === 'registro',
+      isAss: screen === 'assenze',
+      openDocs: p.onOpenDocs || (() => {}),
+      openReg: p.onOpenRegistro || (() => {}),
+      openGiust: p.onOpenGiustificativo || (() => {}),
+      repMaggio: () => (p.onReplaceRegistro || (() => {}))('Maggio 2026', 'registro_presenze_maggio2026.pdf'),
+      repAprile: () => (p.onReplaceRegistro || (() => {}))('Aprile 2026', 'registro_presenze_aprile2026.pdf'),
+      repMarzo: () => (p.onReplaceRegistro || (() => {}))('Marzo 2026', 'registro_presenze_marzo2026.pdf'),
+      regBadge: 'font-size:11px; font-weight:700; padding:3px 9px; border-radius:20px; ' + (reg ? 'background:#e0f3ea; color:#1c8f5a;' : 'background:#fceedb; color:#9c6a1b;'),
+      regBadgeText: reg ? 'Caricato' : 'Da caricare',
+      regBtnText: reg ? 'Sostituisci' : 'Carica',
+      dettOpen: this.state.dettOpen,
+      dettChevron: this.state.dettOpen ? '⌃' : '⌄',
+      toggleDett: () => this.setState(s => ({ dettOpen: !s.dettOpen })),
+    };
+  }
+}
+</script>
+</body>
+</html>

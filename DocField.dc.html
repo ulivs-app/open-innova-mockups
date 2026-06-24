@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: "Instrument Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif; -webkit-font-smoothing: antialiased; color: #2c3033; }
+  @keyframes gsspin { to { transform: rotate(360deg); } }
+  @keyframes gspop { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+</helmet>
+<div style="font-family:inherit;">
+  <sc-if value="{{ hasLabel }}" hint-placeholder-val="{{ true }}">
+    <div style="font-size:11px; font-weight:700; letter-spacing:.06em; color:#9aa0a7; margin-bottom:9px;">{{ label }}</div>
+  </sc-if>
+
+  <sc-if value="{{ filled }}" hint-placeholder-val="{{ true }}">
+    <div style="display:flex; flex-direction:column; gap:12px;">
+      <div style="position:relative; width:100%; height:190px; border:1px solid #cfdbe5; border-radius:8px; background:#fff; overflow:hidden; box-shadow:0 1px 4px rgba(20,30,45,.07);">
+        <div style="position:absolute; inset:0; padding:18px 16px 28px; display:flex; flex-direction:column; gap:6px;">
+          <div style="height:8px; width:55%; background:#d7e0e8; border-radius:2px; align-self:center; margin-bottom:9px;"></div>
+          <div style="height:6px; width:38%; background:#e6edf2; border-radius:2px; margin-bottom:6px;"></div>
+          <div style="height:5px; width:100%; background:#eef2f6; border-radius:2px;"></div>
+          <div style="height:5px; width:92%; background:#eef2f6; border-radius:2px;"></div>
+          <div style="height:5px; width:97%; background:#eef2f6; border-radius:2px;"></div>
+          <div style="height:5px; width:60%; background:#eef2f6; border-radius:2px; margin-bottom:7px;"></div>
+          <div style="height:5px; width:100%; background:#eef2f6; border-radius:2px;"></div>
+          <div style="height:5px; width:88%; background:#eef2f6; border-radius:2px;"></div>
+          <div style="height:5px; width:94%; background:#eef2f6; border-radius:2px;"></div>
+        </div>
+        <div style="position:absolute; left:0; right:0; bottom:0; padding:14px 11px 8px; background:linear-gradient(rgba(255,255,255,0),#fff 62%); display:flex; align-items:center; gap:6px; font-size:11px; color:#56606a; white-space:nowrap; overflow:hidden;">
+          <iconify-icon icon="tabler:file-text" style="font-size:14px; color:#34a0f3; flex:none;"></iconify-icon>
+          <span style="overflow:hidden; text-overflow:ellipsis;">{{ filename }}</span>
+        </div>
+      </div>
+
+      <sc-if value="{{ showAnalysis }}" hint-placeholder-val="{{ false }}">
+        <div style="border:1px solid #e6edf2; border-radius:8px; background:#fbfcfd; padding:11px 12px; display:flex; flex-direction:column; gap:9px;">
+          <div style="display:flex; align-items:center; gap:7px; font-size:10.5px; font-weight:700; letter-spacing:.05em; color:#8a9099;">
+            <iconify-icon icon="tabler:scan" style="font-size:14px; color:#34a0f3;"></iconify-icon> ANALISI AUTOMATICA DEL DOCUMENTO
+          </div>
+          <sc-if value="{{ scanning }}" hint-placeholder-val="{{ true }}">
+            <div style="display:flex; align-items:center; gap:9px; font-size:12.5px; color:#56606a;">
+              <span style="width:15px; height:15px; border:2px solid #d7e0e8; border-top-color:#34a0f3; border-radius:50%; display:inline-block; animation:gsspin .7s linear infinite; flex:none;"></span>
+              Lettura del documento in corso…
+            </div>
+          </sc-if>
+          <sc-if value="{{ hasBadges }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex; flex-direction:column; gap:7px;">
+              <sc-for list="{{ badges }}" as="b" hint-placeholder-count="2">
+                <div style="{{ b.style }}">
+                  <iconify-icon icon="{{ b.icon }}" style="{{ b.iconStyle }}"></iconify-icon>
+                  <span>{{ b.text }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </sc-if>
+        </div>
+      </sc-if>
+
+      <div style="display:flex; gap:10px;">
+        <button onClick="{{ onReplace }}" style="flex:1; border:1px solid #dde2e7; background:#fff; color:#2a2f35; font-size:14px; font-weight:600; padding:12px; border-radius:8px; cursor:pointer;" style-hover="background:#f5f7f9;">Sostituisci</button>
+        <button onClick="{{ onRemove }}" style="border:1px solid #f3c6c2; background:#fff; color:#e05a4f; font-size:17px; padding:0 16px; border-radius:8px; cursor:pointer; display:flex; align-items:center;"><iconify-icon icon="tabler:trash"></iconify-icon></button>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ onUpload }}" style="border:1.5px dashed #b3c2d1; border-radius:10px; padding:38px 20px; text-align:center; background:#fafbfc; cursor:pointer;" style-hover="border-color:#34a0f3; background:#f4f9fe;">
+      <iconify-icon icon="tabler:cloud-upload" style="font-size:44px; color:#8a97a6;"></iconify-icon>
+      <div style="font-size:14px; color:#56606a; margin:12px 0 16px;">Trascina qui o</div>
+      <button onClick="{{ onUpload }}" style="background:#fff; border:1px solid #dde2e7; border-radius:8px; padding:11px 30px; font-size:14px; font-weight:600; color:#2a2f35; cursor:pointer;" style-hover="background:#f5f7f9;">Carica file</button>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 280, &quot;height&quot;: 360}, &quot;label&quot;: {&quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;CARTA D'IDENTIT\u00c0&quot;, &quot;tsType&quot;: &quot;string&quot;}, &quot;filename&quot;: {&quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;documento_2026.pdf&quot;, &quot;tsType&quot;: &quot;string&quot;}, &quot;filled&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;}, &quot;analyzeKind&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;default&quot;: &quot;firma&quot;, &quot;options&quot;: [&quot;&quot;, &quot;firma&quot;, &quot;medico&quot;, &quot;registro&quot;], &quot;tsType&quot;: &quot;string&quot;}, &quot;analyze&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;}, &quot;analyzeSpeed&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;default&quot;: &quot;normal&quot;, &quot;options&quot;: [&quot;fast&quot;, &quot;normal&quot;, &quot;slow&quot;], &quot;tsType&quot;: &quot;string&quot;}, &quot;onUpload&quot;: {&quot;editor&quot;: null, &quot;tsType&quot;: &quot;() =&gt; void&quot;}, &quot;onRemove&quot;: {&quot;editor&quot;: null, &quot;tsType&quot;: &quot;() =&gt; void&quot;}, &quot;onReplace&quot;: {&quot;editor&quot;: null, &quot;tsType&quot;: &quot;() =&gt; void&quot;}}">
+class Component extends DCLogic {
+  state = { phase: 'idle', revealed: 0 };
+  _timers = [];
+
+  _clear() { this._timers.forEach(clearTimeout); this._timers = []; }
+  componentWillUnmount() { this._clear(); }
+
+  _on() {
+    const p = this.props || {};
+    return p.analyze !== false && !!p.analyzeKind && !!p.filled;
+  }
+
+  componentDidMount() {
+    // A document already present at mount (e.g. previously uploaded) shows its
+    // verdict immediately, with no re-scan animation.
+    if (this._on()) this.setState({ phase: 'done', revealed: this._defs().length });
+  }
+
+  componentDidUpdate(prev) {
+    const p = this.props || {};
+    if (prev.filled && !p.filled) { this._clear(); this.setState({ phase: 'idle', revealed: 0 }); return; }
+    if (!prev.filled && p.filled && p.analyze !== false && p.analyzeKind) this._start();
+  }
+
+  _start() {
+    this._clear();
+    const sp = this.props.analyzeSpeed || 'normal';
+    const base = sp === 'fast' ? 350 : sp === 'slow' ? 1300 : 800;
+    const defs = this._defs();
+    this.setState({ phase: 'scanning', revealed: 0 });
+    this._timers.push(setTimeout(() => {
+      this.setState({ phase: 'revealing', revealed: 0 });
+      defs.forEach((d, i) => {
+        this._timers.push(setTimeout(() => {
+          this.setState({ revealed: i + 1, phase: i + 1 === defs.length ? 'done' : 'revealing' });
+        }, i * (base * 0.5)));
+      });
+    }, base));
+  }
+
+  _defs() {
+    const map = {
+      firma: [
+        { kind: 'success', icon: 'tabler:writing-sign', text: 'Firma del volontario rilevata' },
+        { kind: 'warning', icon: 'tabler:calendar-event', text: 'Data della firma: 12/06/2026' },
+        { kind: 'success', icon: 'tabler:circle-check', text: 'Documento leggibile e completo' },
+      ],
+      medico: [
+        { kind: 'info', icon: 'tabler:stethoscope', text: 'Riconosciuto come certificato medico' },
+        { kind: 'success', icon: 'tabler:writing-sign', text: 'Timbro e firma del medico presenti' },
+        { kind: 'warning', icon: 'tabler:calendar-event', text: 'Data del certificato: 06/02/2026' },
+      ],
+      registro: [
+        { kind: 'success', icon: 'tabler:writing-sign', text: 'Firma del volontario rilevata' },
+        { kind: 'success', icon: 'tabler:circle-check', text: 'Firma dell\u2019OLP presente' },
+        { kind: 'warning', icon: 'tabler:calendar-event', text: 'Periodo rilevato: Giugno 2026' },
+      ],
+    };
+    return map[this.props && this.props.analyzeKind] || [];
+  }
+
+  _style(kind) {
+    const c = kind === 'warning' ? ['#fceedb', '#9c6a1b'] : kind === 'info' ? ['#e6f1fa', '#1f5d8c'] : ['#e0f3ea', '#1c8f5a'];
+    return 'display:inline-flex; align-items:center; gap:7px; font-size:12px; font-weight:600; padding:7px 10px; border-radius:7px; animation:gspop .28s ease both; background:' + c[0] + '; color:' + c[1] + ';';
+  }
+
+  renderVals() {
+    const p = this.props || {};
+    const filled = !!p.filled;
+    const noop = () => {};
+    const on = p.analyze !== false && !!p.analyzeKind && filled;
+    const defs = this._defs();
+    const revealed = this.state.phase === 'idle' ? 0 : this.state.revealed;
+    const badges = defs.slice(0, revealed).map((d) => ({
+      text: d.text, icon: d.icon, iconStyle: 'font-size:15px; flex:none;', style: this._style(d.kind),
+    }));
+    return {
+      label: p.label || '',
+      hasLabel: !!(p.label && String(p.label).length),
+      filename: p.filename || 'documento.pdf',
+      filled,
+      empty: !filled,
+      onUpload: p.onUpload || noop,
+      onRemove: p.onRemove || noop,
+      onReplace: p.onReplace || p.onUpload || noop,
+      showAnalysis: on,
+      scanning: on && this.state.phase === 'scanning',
+      hasBadges: on && badges.length > 0,
+      badges,
+    };
+  }
+}
+</script>
+</body>
+</html>
