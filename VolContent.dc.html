@@ -36,6 +36,19 @@
       <div style="border:1px solid #cfdbe5; border-radius:10px; padding:20px 22px;"><div style="display:flex; align-items:center; gap:13px; margin-bottom:18px;"><div style="width:40px; height:40px; border-radius:8px; background:#e6f1fa; display:flex; align-items:center; justify-content:center;"><iconify-icon icon="tabler:beach" style="font-size:21px; color:#34a0f3;"></iconify-icon></div><div style="font-size:15px; font-weight:600; color:#2a2f35;">Permessi usufruiti</div></div><div style="display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:12px;"><div style="font-size:34px; font-weight:800; letter-spacing:-.02em;">15</div><div style="font-size:13px; color:#9aa0a7;">su 20 totali</div></div><div style="height:6px; border-radius:6px; background:#eef0f3; overflow:hidden;"><div style="height:100%; width:75%; background:#9aa0a7; border-radius:6px;"></div></div></div>
       <div style="border:1px solid #cfdbe5; border-radius:10px; padding:20px 22px;"><div style="display:flex; align-items:center; gap:13px; margin-bottom:18px;"><div style="width:40px; height:40px; border-radius:8px; background:#e6f1fa; display:flex; align-items:center; justify-content:center;"><iconify-icon icon="tabler:calendar-star" style="font-size:21px; color:#34a0f3;"></iconify-icon></div><div style="font-size:15px; font-weight:600; color:#2a2f35; line-height:1.25;">Perm. straordinari con limitazione di fruizione</div></div><div style="display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:12px;"><div style="font-size:34px; font-weight:800; letter-spacing:-.02em;">6</div><div style="font-size:13px; color:#9aa0a7;">su 15 totali</div></div><div style="height:6px; border-radius:6px; background:#eef0f3; overflow:hidden;"><div style="height:100%; width:40%; background:#34a0f3; border-radius:6px;"></div></div></div>
     </div>
+    <sc-if value="{{ monteOreAnnuo }}" hint-placeholder-val="{{ true }}">
+      <div style="border:1px solid #cfdbe5; border-radius:10px; padding:20px 24px; margin-bottom:14px;">
+        <div style="display:flex; align-items:center; gap:13px; margin-bottom:16px;">
+          <div style="width:40px; height:40px; border-radius:8px; background:#e6f1fa; display:flex; align-items:center; justify-content:center;"><iconify-icon icon="tabler:clock-hour-4" style="font-size:21px; color:#34a0f3;"></iconify-icon></div>
+          <div style="font-size:15px; font-weight:600; color:#2a2f35;">Ore di servizio maturate</div>
+        </div>
+        <div style="display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:12px;">
+          <div style="font-size:34px; font-weight:800; letter-spacing:-.02em;">{{ oreMaturate }}<span style="font-size:17px; font-weight:700; color:#9aa0a7; margin-left:5px;">ore</span></div>
+          <div style="font-size:13px; color:#9aa0a7;">su {{ oreTotali }} totali</div>
+        </div>
+        <div style="height:6px; border-radius:6px; background:#eef0f3; overflow:hidden;"><div style="height:100%; width:{{ orePctW }}; background:#34a0f3; border-radius:6px;"></div></div>
+      </div>
+    </sc-if>
     <div style="margin-bottom:24px;">
       <div style="text-align:right;"><span onClick="{{ toggleDett }}" style="font-size:13px; color:#34a0f3; font-weight:600; cursor:pointer;">Dettagli Permessi Straordinari {{ dettChevron }}</span></div>
       <sc-if value="{{ dettOpen }}" hint-placeholder-val="{{ false }}">
@@ -71,7 +84,7 @@
     <div style="font-size:14px; color:#56606a; line-height:1.55; margin-bottom:26px; max-width:640px;">Carica ogni mese il registro delle presenze firmato in formato PDF. Insieme puoi allegare, facoltativamente, il registro di compresenza dell'OLP.</div>
     <div style="display:flex; flex-direction:column; gap:12px;">
       <div style="border:1px solid #cfdbe5; border-radius:10px; padding:16px 18px; display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap;">
-        <div style="display:flex; align-items:center; gap:13px;"><div style="width:40px; height:40px; border-radius:8px; background:#e6f1fa; display:flex; align-items:center; justify-content:center;"><iconify-icon icon="tabler:calendar-month" style="font-size:21px; color:#34a0f3;"></iconify-icon></div><div><div style="font-size:15px; font-weight:700;">Giugno 2026</div><div style="font-size:12.5px; color:#8a9099; margin-top:2px;">Mese in corso</div></div></div>
+        <div style="display:flex; align-items:center; gap:13px;"><div style="width:40px; height:40px; border-radius:8px; background:#e6f1fa; display:flex; align-items:center; justify-content:center;"><iconify-icon icon="tabler:calendar-month" style="font-size:21px; color:#34a0f3;"></iconify-icon></div><div><div style="font-size:15px; font-weight:700;">Giugno 2026</div><div style="font-size:12.5px; color:#8a9099; margin-top:2px;">Mese in corso</div><sc-if value="{{ oreMeseShow }}" hint-placeholder-val="{{ false }}"><div style="font-size:12px; color:#34a0f3; font-weight:600; margin-top:4px;">{{ oreMeseNum }} ore registrate</div></sc-if></div></div>
         <div style="display:flex; align-items:center; gap:12px;"><span style="{{ regBadge }}">{{ regBadgeText }}</span><button onClick="{{ openReg }}" style="border:1px solid #dde2e7; background:#fff; color:#2a2f35; font-size:13px; font-weight:600; padding:9px 16px; border-radius:8px; cursor:pointer;" style-hover="background:#f5f7f9;">{{ regBtnText }}</button></div>
       </div>
       <div style="border:1px solid #cfdbe5; border-radius:10px; padding:16px 18px; display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap;">
@@ -136,15 +149,27 @@
     </div>
   </sc-if>
 
+  <!-- ===== CERTIFICAZIONE: DOCUMENTO DI TRASPARENZA ===== -->
+  <sc-if value="{{ isTra }}" hint-placeholder-val="{{ false }}">
+    <dc-import name="Trasparenza" view="doc" role="vol" ai-enabled="{{ aiEnabled }}" assistant-name="{{ asstName }}" hint-size="100%,560px"></dc-import>
+  </sc-if>
+
+  <!-- ===== CERTIFICAZIONE: AREE DI ATTIVITÀ ===== -->
+  <sc-if value="{{ isAda }}" hint-placeholder-val="{{ false }}">
+    <dc-import name="Trasparenza" view="ada" role="vol" ai-enabled="{{ aiEnabled }}" assistant-name="{{ asstName }}" hint-size="100%,420px"></dc-import>
+  </sc-if>
+
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1000, &quot;height&quot;: 700}, &quot;screen&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;dashboard&quot;, &quot;registro&quot;, &quot;assenze&quot;], &quot;default&quot;: &quot;dashboard&quot;, &quot;tsType&quot;: &quot;string&quot;}, &quot;regMese&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: false, &quot;tsType&quot;: &quot;boolean&quot;}, &quot;onOpenDocs&quot;: {&quot;editor&quot;: null, &quot;tsType&quot;: &quot;() =&gt; void&quot;}, &quot;onOpenRegistro&quot;: {&quot;editor&quot;: null, &quot;tsType&quot;: &quot;() =&gt; void&quot;}, &quot;onOpenGiustificativo&quot;: {&quot;editor&quot;: null, &quot;tsType&quot;: &quot;() =&gt; void&quot;}, &quot;onReplaceRegistro&quot;: {&quot;editor&quot;: null, &quot;tsType&quot;: &quot;(month: string, filename: string) =&gt; void&quot;}, &quot;onNuovaAssenza&quot;: {&quot;editor&quot;: null, &quot;tsType&quot;: &quot;(type: string) =&gt; void&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1000, &quot;height&quot;: 700}, &quot;screen&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;dashboard&quot;, &quot;registro&quot;, &quot;assenze&quot;, &quot;trasparenza&quot;], &quot;default&quot;: &quot;dashboard&quot;, &quot;tsType&quot;: &quot;string&quot;}, &quot;regMese&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: false, &quot;tsType&quot;: &quot;boolean&quot;}, &quot;monteOreAnnuo&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;}, &quot;aiEnabled&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;}, &quot;assistantName&quot;: {&quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;Pasquale&quot;, &quot;tsType&quot;: &quot;string&quot;}, &quot;oreMaturate&quot;: {&quot;editor&quot;: null, &quot;default&quot;: 276, &quot;tsType&quot;: &quot;number&quot;}, &quot;oreTotali&quot;: {&quot;editor&quot;: null, &quot;default&quot;: 1145, &quot;tsType&quot;: &quot;number&quot;}, &quot;orePct&quot;: {&quot;editor&quot;: null, &quot;default&quot;: 24, &quot;tsType&quot;: &quot;number&quot;}, &quot;oreMeseNum&quot;: {&quot;editor&quot;: null, &quot;default&quot;: 0, &quot;tsType&quot;: &quot;number&quot;}, &quot;onOpenDocs&quot;: {&quot;editor&quot;: null, &quot;tsType&quot;: &quot;() =&gt; void&quot;}, &quot;onOpenRegistro&quot;: {&quot;editor&quot;: null, &quot;tsType&quot;: &quot;() =&gt; void&quot;}, &quot;onOpenGiustificativo&quot;: {&quot;editor&quot;: null, &quot;tsType&quot;: &quot;() =&gt; void&quot;}, &quot;onReplaceRegistro&quot;: {&quot;editor&quot;: null, &quot;tsType&quot;: &quot;(month: string, filename: string) =&gt; void&quot;}, &quot;onNuovaAssenza&quot;: {&quot;editor&quot;: null, &quot;tsType&quot;: &quot;(type: string) =&gt; void&quot;}}">
 class Component extends DCLogic {
   state = { dettOpen: false, nuovaOpen: false };
   renderVals() {
     const p = this.props || {};
     const screen = p.screen || 'dashboard';
     const reg = !!p.regMese;
+    const aiEnabled = p.aiEnabled !== false;
+    const asst = p.assistantName || 'Pasquale';
     const nuova = (type) => {
       this.setState({ nuovaOpen: false });
       (p.onNuovaAssenza || (() => {}))(type);
@@ -160,6 +185,16 @@ class Component extends DCLogic {
       isDash: screen === 'dashboard',
       isReg: screen === 'registro',
       isAss: screen === 'assenze',
+      isTra: screen === 'trasparenza',
+      isAda: screen === 'ada',
+      aiEnabled: aiEnabled,
+      asstName: asst,
+      monteOreAnnuo: p.monteOreAnnuo !== false,
+      oreMaturate: p.oreMaturate ?? 276,
+      oreTotali: p.oreTotali ?? 1145,
+      orePctW: (p.orePct ?? 24) + '%',
+      oreMeseNum: p.oreMeseNum ?? 0,
+      oreMeseShow: p.monteOreAnnuo !== false && (p.oreMeseNum ?? 0) > 0,
       openDocs: p.onOpenDocs || (() => {}),
       openReg: p.onOpenRegistro || (() => {}),
       openGiust: p.onOpenGiustificativo || (() => {}),
