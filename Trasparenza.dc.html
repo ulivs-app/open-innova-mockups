@@ -94,29 +94,57 @@
 
     <!-- generated / published document (both roles) -->
     <sc-if value="{{ showDoc }}" hint-placeholder-val="{{ false }}">
-      <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; margin:18px 0 12px; flex-wrap:wrap;">
+      <!-- document type switch -->
+      <div style="display:inline-flex; gap:4px; padding:4px; background:#f1f4f7; border-radius:10px; margin:18px 0 14px;">
+        <button onClick="{{ pickTra }}" style="{{ traTabStyle }}">Documento di Trasparenza</button>
+        <button onClick="{{ pickAtt }}" style="{{ attTabStyle }}">Attestato Specifico</button>
+      </div>
+
+      <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; margin:0 0 12px; flex-wrap:wrap;">
         <sc-if value="{{ isAdmin }}" hint-placeholder-val="{{ false }}"><span style="display:inline-flex; align-items:center; gap:6px; font-size:12.5px; font-weight:700; padding:5px 12px; border-radius:20px; background:#e6f1fa; color:#1f5d8c;"><iconify-icon icon="tabler:sparkles" style="font-size:14px;"></iconify-icon>Bozza generata dall'AI</span></sc-if>
-        <sc-if value="{{ isVol }}" hint-placeholder-val="{{ true }}"><span style="display:inline-flex; align-items:center; gap:6px; font-size:12.5px; font-weight:700; padding:5px 12px; border-radius:20px; background:#e0f3ea; color:#1c8f5a;"><iconify-icon icon="tabler:circle-check-filled" style="font-size:14px;"></iconify-icon>Pubblicato dall'OLP</span></sc-if>
+        <sc-if value="{{ isVol }}" hint-placeholder-val="{{ true }}"><span style="display:inline-flex; align-items:center; gap:6px; font-size:12.5px; font-weight:700; padding:5px 12px; border-radius:20px; background:#e0f3ea; color:#1c8f5a;"><iconify-icon icon="tabler:circle-check-filled" style="font-size:14px;"></iconify-icon>Generato</span></sc-if>
         <div style="display:flex; align-items:center; gap:10px;">
           <button style="border:1px solid #dde2e7; background:#fff; color:#2a2f35; font-size:13px; font-weight:600; padding:8px 15px; border-radius:8px; cursor:pointer;" style-hover="background:#f5f7f9;">Scarica PDF</button>
           <sc-if value="{{ showRegen }}" hint-placeholder-val="{{ false }}"><button onClick="{{ generate }}" style="border:1px solid #c6dcf1; background:#f2f8fe; color:#1f5d8c; font-size:13px; font-weight:600; padding:8px 15px; border-radius:8px; cursor:pointer;" style-hover="background:#e6f1fa;">Rigenera</button></sc-if>
         </div>
       </div>
-      <div style="border:1px solid #e6edf2; border-radius:10px; padding:28px 30px; background:#fff; box-shadow:inset 0 0 0 1px #f4f6f8;">
-        <div style="font-size:11px; font-weight:700; letter-spacing:.08em; color:#9aa0a7; margin-bottom:6px;">SERVIZIO CIVILE UNIVERSALE</div>
-        <div style="font-size:19px; font-weight:800; letter-spacing:-.01em; margin-bottom:4px;">Documento di Trasparenza delle attività</div>
-        <div style="font-size:13px; color:#8a9099; margin-bottom:18px;">Luke Skywalker · Progetto "Prove di Volo" · Sede Biblioteca Coruscant</div>
-        <div style="font-size:14px; line-height:1.7; color:#3a4047;">Nel corso del servizio, l'operatore volontario ha preso parte in modo continuativo alle attività previste dal progetto, operando in affiancamento all'OLP e al personale della sede. Di seguito le attività svolte, ricondotte alle Aree di Attività (ADA) del progetto.</div>
-        <div style="margin-top:18px; display:flex; flex-direction:column; gap:16px;">
-          <sc-for list="{{ adaBlocks }}" as="b" hint-placeholder-count="3">
-            <div>
-              <div style="font-size:14px; font-weight:700; margin-bottom:5px; color:#2a2f35;">{{ b.title }}</div>
-              <div style="font-size:13.5px; line-height:1.65; color:#56606a;">{{ b.body }}</div>
-            </div>
-          </sc-for>
+
+      <!-- DOCUMENTO DI TRASPARENZA -->
+      <sc-if value="{{ showTraDoc }}" hint-placeholder-val="{{ true }}">
+        <div style="border:1px solid #e6edf2; border-radius:10px; padding:28px 30px; background:#fff; box-shadow:inset 0 0 0 1px #f4f6f8;">
+          <div style="font-size:11px; font-weight:700; letter-spacing:.08em; color:#9aa0a7; margin-bottom:6px;">SERVIZIO CIVILE UNIVERSALE</div>
+          <div style="font-size:19px; font-weight:800; letter-spacing:-.01em; margin-bottom:4px;">Documento di Trasparenza delle attività</div>
+          <div style="font-size:13px; color:#8a9099; margin-bottom:18px;">Luke Skywalker · Progetto "Prove di Volo" · Sede Biblioteca Coruscant</div>
+          <div style="font-size:14px; line-height:1.7; color:#3a4047;">Nel corso del servizio, l'operatore volontario ha preso parte in modo continuativo alle attività previste dal progetto, operando in affiancamento all'OLP e al personale della sede. Di seguito le attività svolte, ricondotte alle Aree di Attività (ADA) del progetto.</div>
+          <div style="margin-top:18px; display:flex; flex-direction:column; gap:16px;">
+            <sc-for list="{{ adaBlocks }}" as="b" hint-placeholder-count="3">
+              <div>
+                <div style="font-size:14px; font-weight:700; margin-bottom:5px; color:#2a2f35;">{{ b.title }}</div>
+                <div style="font-size:13.5px; line-height:1.65; color:#56606a;">{{ b.body }}</div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="margin-top:20px; padding-top:16px; border-top:1px solid #eef0f3; font-size:12.5px; color:#9aa0a7; font-style:italic;">{{ footNote }}</div>
         </div>
-        <div style="margin-top:20px; padding-top:16px; border-top:1px solid #eef0f3; font-size:12.5px; color:#9aa0a7; font-style:italic;">{{ footNote }}</div>
-      </div>
+      </sc-if>
+
+      <!-- ATTESTATO SPECIFICO -->
+      <sc-if value="{{ showAttDoc }}" hint-placeholder-val="{{ false }}">
+        <div style="border:1px solid #e6edf2; border-radius:10px; padding:28px 30px; background:#fff; box-shadow:inset 0 0 0 1px #f4f6f8;">
+          <div style="font-size:11px; font-weight:700; letter-spacing:.08em; color:#9aa0a7; margin-bottom:6px;">SERVIZIO CIVILE UNIVERSALE</div>
+          <div style="font-size:19px; font-weight:800; letter-spacing:-.01em; margin-bottom:4px;">Attestato Specifico</div>
+          <div style="font-size:13px; color:#8a9099; margin-bottom:20px;">Luke Skywalker · Progetto "Prove di Volo" · Sede Biblioteca Coruscant</div>
+          <div style="display:flex; flex-direction:column; gap:18px;">
+            <sc-for list="{{ attBlocks }}" as="b" hint-placeholder-count="3">
+              <div>
+                <div style="font-size:12px; font-weight:700; letter-spacing:.05em; color:#34a0f3; margin-bottom:6px;">{{ b.title }}</div>
+                <div style="font-size:13.5px; line-height:1.7; color:#3a4047;">{{ b.body }}</div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="margin-top:22px; padding-top:16px; border-top:1px solid #eef0f3; font-size:13px; color:#56606a;">Perugia, lì 27 Maggio 2026</div>
+        </div>
+      </sc-if>
     </sc-if>
   </sc-if>
 
@@ -124,7 +152,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 760, &quot;height&quot;: 620}, &quot;view&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;doc&quot;, &quot;ada&quot;], &quot;default&quot;: &quot;doc&quot;, &quot;tsType&quot;: &quot;string&quot;}, &quot;role&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;admin&quot;, &quot;vol&quot;], &quot;default&quot;: &quot;vol&quot;, &quot;tsType&quot;: &quot;string&quot;}, &quot;aiEnabled&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;}, &quot;assistantName&quot;: {&quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;Pasquale&quot;, &quot;tsType&quot;: &quot;string&quot;}}">
 class Component extends DCLogic {
-  state = { generating: false, generated: false };
+  state = { generating: false, generated: false, docType: 'tra' };
   componentWillUnmount() { clearTimeout(this._t); }
   renderVals() {
     const p = this.props || {};
@@ -143,13 +171,22 @@ class Component extends DCLogic {
       { month: 'Aprile 2026', text: 'Supporto alla catalogazione delle nuove acquisizioni; affiancamento al laboratorio di lettura per le scuole.' },
       { month: 'Marzo 2026', text: 'Orientamento degli utenti al catalogo online; sistemazione e ricollocazione volumi a scaffale.' },
     ];
+    const attBlocks = [
+      { title: 'ATTIVITÀ DELL’OPERATORE VOLONTARIO', body: "L'operatore volontario ha collaborato alle attività della biblioteca occupandosi dell'accoglienza degli utenti, del prestito e del reference, del riordino e della catalogazione dei volumi. Ha affiancato gli operatori nei laboratori di lettura per le scuole e nella preparazione di iniziative culturali, curando anche la comunicazione degli eventi." },
+      { title: 'COMPETENZE CHIAVE DI CITTADINANZA', body: "Ha sviluppato competenze organizzative e gestionali nel supporto alle attività quotidiane, competenze digitali nell'uso del catalogo e del software gestionale e competenze relazionali grazie al contatto diretto con l'utenza. Ha rafforzato precisione, autonomia, capacità di lavorare in gruppo e di gestire le priorità, oltre alla comunicazione promozionale attraverso social e materiali informativi." },
+      { title: 'CONOSCENZE ACQUISITE NELLA FORMAZIONE SPECIFICA', body: "Durante la formazione specifica ha acquisito conoscenze sulla gestione del patrimonio librario, sulle metodologie di promozione della lettura e sulla progettazione di laboratori didattici. Ha approfondito la sicurezza e la prevenzione dei rischi e conosciuto la rete di enti e partner del territorio, consolidando competenze organizzative, relazionali e operative utili allo svolgimento del servizio." },
+    ];
     const adaBlocks = [
       { title: 'Accoglienza e orientamento degli utenti', body: "Il volontario ha garantito l'accoglienza al front office, orientando gli utenti nella consultazione del catalogo e assistendoli nelle operazioni di iscrizione e prestito." },
       { title: 'Catalogazione e cura del patrimonio', body: 'Ha collaborato al riordino dei volumi a scaffale e al supporto delle attività di catalogazione delle nuove acquisizioni, contribuendo alla corretta gestione del patrimonio librario.' },
       { title: 'Promozione culturale e della lettura', body: 'Ha affiancato gli operatori nei laboratori di lettura rivolti alle scuole e nella preparazione di iniziative di promozione culturale rivolte alla comunità.' },
     ];
-    // volunteer sees the document as already published; admin generates it on demand
+    // volunteer sees the document as already available; admin generates it on demand
     const showDoc = isAdmin ? st.generated : true;
+    const docType = st.docType || 'tra';
+    const tabBase = 'border:none; font-size:13px; font-weight:600; padding:8px 16px; border-radius:7px; cursor:pointer; ';
+    const tabOn = tabBase + 'background:#fff; color:#1f5d8c; box-shadow:0 1px 3px rgba(0,0,0,.12);';
+    const tabOff = tabBase + 'background:transparent; color:#6b747d;';
     return {
       isAda: view === 'ada',
       isDoc: view !== 'ada',
@@ -161,13 +198,20 @@ class Component extends DCLogic {
       adaList: adaList,
       activities: activities,
       adaBlocks: adaBlocks,
+      attBlocks: attBlocks,
+      showTraDoc: docType === 'tra',
+      showAttDoc: docType === 'att',
+      traTabStyle: docType === 'tra' ? tabOn : tabOff,
+      attTabStyle: docType === 'att' ? tabOn : tabOff,
+      pickTra: () => this.setState({ docType: 'tra' }),
+      pickAtt: () => this.setState({ docType: 'att' }),
       generating: st.generating,
       genIdle: !st.generating,
       showGenerateCta: isAdmin && !st.generated,
       showDoc: showDoc,
       showRegen: isAdmin && aiEnabled,
       volWaiting: false,
-      footNote: isAdmin ? 'Bozza generata dall\u2019AI a partire dalle attivit\u00e0 dei registri. Da rivedere prima della pubblicazione.' : 'Documento pubblicato dall\u2019OLP e disponibile per la certificazione delle competenze.',
+      footNote: isAdmin ? 'Bozza generata dall\u2019AI a partire dalle attivit\u00e0 dei registri. Da rivedere prima della pubblicazione.' : 'Documento generato, disponibile per il riconoscimento delle competenze.',
       genBtnStyle: 'display:inline-flex; align-items:center; gap:9px; border:none; font-size:14px; font-weight:600; padding:12px 22px; border-radius:8px; ' + (st.generating ? 'background:#9cc9ef; color:#fff; cursor:wait;' : 'background:#34a0f3; color:#fff; cursor:pointer;'),
       generate: () => {
         if (st.generating) return;
