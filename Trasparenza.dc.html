@@ -22,7 +22,7 @@
   <!-- ===== VIEW: AREE DI ATTIVITÀ ===== -->
   <sc-if value="{{ isAda }}" hint-placeholder-val="{{ false }}">
     <h1 style="font-size:30px; font-weight:800; margin:0 0 8px; letter-spacing:-.02em;" data-screen-label="Aree di Attività">Aree di Attività</h1>
-    <div style="font-size:14px; color:#56606a; line-height:1.55; margin-bottom:24px; max-width:660px;">Le Aree di Attività (ADA) definite dal progetto <b style="color:#2a2f35;">Prove di Volo</b>. Sono la base su cui viene redatto il Documento di Trasparenza.</div>
+    <div style="font-size:14px; color:#56606a; line-height:1.55; margin-bottom:24px; max-width:660px;">Le Aree di Attività (ADA) definite dal progetto <b style="color:#2a2f35;">Prove di Volo</b>. Sono la base su cui vengono redatti il Documento di Trasparenza e l'Attestato Specifico.</div>
     <div style="display:flex; flex-direction:column; gap:12px;">
       <sc-for list="{{ adaList }}" as="a" hint-placeholder-count="3">
         <div style="border:1px solid #cfdbe5; border-radius:10px; padding:18px 20px; display:flex; gap:15px;">
@@ -38,12 +38,34 @@
 
   <!-- ===== VIEW: DOCUMENTO DI TRASPARENZA ===== -->
   <sc-if value="{{ isDoc }}" hint-placeholder-val="{{ true }}">
-    <h1 style="font-size:30px; font-weight:800; margin:0 0 8px; letter-spacing:-.02em;" data-screen-label="Documento di Trasparenza">Documento di Trasparenza</h1>
+    <h1 style="font-size:30px; font-weight:800; margin:0 0 8px; letter-spacing:-.02em;" data-screen-label="Riconoscimento delle competenze">Riconoscimento delle competenze</h1>
 
     <!-- ADMIN: redazione -->
     <sc-if value="{{ isAdmin }}" hint-placeholder-val="{{ false }}">
-      <div style="font-size:14px; color:#56606a; line-height:1.55; margin-bottom:24px; max-width:680px;">Le attività raccolte dai registri mensili del volontario vengono ricondotte alle Aree di Attività del progetto. L'AI redige il documento; potrai rivederlo prima della pubblicazione.</div>
+      <div style="font-size:14px; color:#56606a; line-height:1.55; margin-bottom:24px; max-width:680px;">Le attività raccolte dai registri mensili del volontario vengono ricondotte alle Aree di Attività del progetto. L'AI redige una bozza del Documento di Trasparenza e dell'Attestato Specifico; il testo resta modificabile dall'ente o dall'OLP prima della pubblicazione.</div>
+    </sc-if>
 
+    <sc-if value="{{ isVol }}" hint-placeholder-val="{{ true }}">
+      <div style="font-size:14px; color:#56606a; line-height:1.55; margin-bottom:24px; max-width:680px;">Il Documento di Trasparenza e l'Attestato Specifico, generati a partire dalle attività riportate nei tuoi registri mensili.</div>
+    </sc-if>
+
+    <!-- ADA recap: always visible, both roles -->
+    <div style="border:1px solid #cfdbe5; border-radius:10px; padding:20px 22px; margin-bottom:16px;">
+      <div style="font-size:12px; font-weight:700; letter-spacing:.05em; color:#9aa0a7; margin-bottom:4px;">AREE DI ATTIVITÀ DEL PROGETTO</div>
+      <div style="font-size:12.5px; color:#8a9099; margin-bottom:14px;">La base su cui vengono redatti il Documento di Trasparenza e l'Attestato Specifico.</div>
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <sc-for list="{{ adaList }}" as="a" hint-placeholder-count="3">
+          <div style="display:flex; gap:12px; align-items:flex-start;">
+            <div style="width:30px; height:30px; flex:none; border-radius:7px; background:#e6f1fa; display:flex; align-items:center; justify-content:center; font-size:12.5px; font-weight:800; color:#34a0f3;">{{ a.code }}</div>
+            <div style="padding-top:5px;">
+              <div style="font-size:13.5px; font-weight:700; color:#2a2f35; line-height:1.4;">{{ a.title }}</div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <sc-if value="{{ isAdmin }}" hint-placeholder-val="{{ false }}">
       <div style="border:1px solid #cfdbe5; border-radius:10px; padding:20px 22px; margin-bottom:16px;">
         <div style="font-size:15px; font-weight:700; margin-bottom:4px;">Attività raccolte dai registri</div>
         <div style="font-size:12.5px; color:#8a9099; margin-bottom:14px;">Inserite dal volontario al caricamento di ogni registro mensile.</div>
@@ -60,17 +82,11 @@
       <!-- generate CTA -->
       <sc-if value="{{ showGenerateCta }}" hint-placeholder-val="{{ true }}">
         <div style="border:1px solid #cfdbe5; border-radius:10px; padding:22px 24px;">
-          <div style="font-size:12px; font-weight:700; letter-spacing:.05em; color:#9aa0a7; margin-bottom:10px;">ADA DEL PROGETTO</div>
-          <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:18px;">
-            <sc-for list="{{ adaList }}" as="a" hint-placeholder-count="3">
-              <div style="display:flex; align-items:flex-start; gap:10px; font-size:13.5px; color:#3a4047; line-height:1.5;"><iconify-icon icon="tabler:point-filled" style="font-size:15px; color:#34a0f3; flex:none; margin-top:2px;"></iconify-icon><span>{{ a.title }}</span></div>
-            </sc-for>
-          </div>
           <sc-if value="{{ aiEnabled }}" hint-placeholder-val="{{ true }}">
             <button onClick="{{ generate }}" disabled="{{ generating }}" style="{{ genBtnStyle }}">
               <iconify-icon icon="tabler:sparkles" style="font-size:17px;"></iconify-icon>
               <sc-if value="{{ generating }}" hint-placeholder-val="{{ false }}"><span>{{ asstName }} sta redigendo il documento…</span></sc-if>
-              <sc-if value="{{ genIdle }}" hint-placeholder-val="{{ true }}"><span>Genera Documento di Trasparenza con l'AI</span></sc-if>
+              <sc-if value="{{ genIdle }}" hint-placeholder-val="{{ true }}"><span>Genera i documenti con l'AI</span></sc-if>
             </button>
           </sc-if>
           <sc-if value="{{ aiDisabled }}" hint-placeholder-val="{{ false }}">
@@ -80,14 +96,13 @@
       </sc-if>
     </sc-if>
 
-    <!-- VOL: read-only intro -->
+    <!-- VOL: waiting state -->
     <sc-if value="{{ isVol }}" hint-placeholder-val="{{ true }}">
-      <div style="font-size:14px; color:#56606a; line-height:1.55; margin-bottom:24px; max-width:680px;">Il Documento di Trasparenza redatto dal tuo OLP a partire dalle attività riportate nei registri mensili.</div>
       <sc-if value="{{ volWaiting }}" hint-placeholder-val="{{ false }}">
         <div style="display:flex; flex-direction:column; align-items:center; text-align:center; gap:8px; padding:34px 20px; border:1px dashed #cfdbe5; border-radius:10px; color:#8a9099;">
           <iconify-icon icon="tabler:file-time" style="font-size:28px;"></iconify-icon>
-          <div style="font-size:14px; font-weight:600; color:#56606a;">Documento non ancora disponibile</div>
-          <div style="font-size:12.5px; max-width:360px;">Il tuo OLP redigerà il documento sulla base delle attività dei registri.</div>
+          <div style="font-size:14px; font-weight:600; color:#56606a;">In attesa dell’Ente</div>
+          <div style="font-size:12.5px; max-width:360px;">I documenti verranno generati sulla base delle attività riportate nei registri.</div>
         </div>
       </sc-if>
     </sc-if>
@@ -105,22 +120,27 @@
         <sc-if value="{{ isVol }}" hint-placeholder-val="{{ true }}"><span style="display:inline-flex; align-items:center; gap:6px; font-size:12.5px; font-weight:700; padding:5px 12px; border-radius:20px; background:#e0f3ea; color:#1c8f5a;"><iconify-icon icon="tabler:circle-check-filled" style="font-size:14px;"></iconify-icon>Generato</span></sc-if>
         <div style="display:flex; align-items:center; gap:10px;">
           <button style="border:1px solid #dde2e7; background:#fff; color:#2a2f35; font-size:13px; font-weight:600; padding:8px 15px; border-radius:8px; cursor:pointer;" style-hover="background:#f5f7f9;">Scarica PDF</button>
+          <sc-if value="{{ canEdit }}" hint-placeholder-val="{{ false }}"><button onClick="{{ toggleEdit }}" style="{{ editBtnStyle }}"><iconify-icon icon="{{ editBtnIcon }}" style="font-size:15px;"></iconify-icon>{{ editBtnLabel }}</button></sc-if>
           <sc-if value="{{ showRegen }}" hint-placeholder-val="{{ false }}"><button onClick="{{ generate }}" style="border:1px solid #c6dcf1; background:#f2f8fe; color:#1f5d8c; font-size:13px; font-weight:600; padding:8px 15px; border-radius:8px; cursor:pointer;" style-hover="background:#e6f1fa;">Rigenera</button></sc-if>
         </div>
       </div>
 
+      <sc-if value="{{ editing }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex; gap:9px; align-items:flex-start; background:#fff8e6; border:1px solid #f0dfae; border-radius:8px; padding:11px 14px; margin-bottom:12px; font-size:12.5px; color:#7a6320; line-height:1.5;"><iconify-icon icon="tabler:pencil" style="font-size:15px; flex:none; margin-top:1px;"></iconify-icon><span>Modalità revisione attiva: clicca su un paragrafo per correggerlo. Le modifiche dell'ente o dell'OLP sostituiscono la bozza dell'AI.</span></div>
+      </sc-if>
+
       <!-- DOCUMENTO DI TRASPARENZA -->
       <sc-if value="{{ showTraDoc }}" hint-placeholder-val="{{ true }}">
-        <div style="border:1px solid #e6edf2; border-radius:10px; padding:28px 30px; background:#fff; box-shadow:inset 0 0 0 1px #f4f6f8;">
+        <div style="{{ paperStyle }}">
           <div style="font-size:11px; font-weight:700; letter-spacing:.08em; color:#9aa0a7; margin-bottom:6px;">SERVIZIO CIVILE UNIVERSALE</div>
           <div style="font-size:19px; font-weight:800; letter-spacing:-.01em; margin-bottom:4px;">Documento di Trasparenza delle attività</div>
           <div style="font-size:13px; color:#8a9099; margin-bottom:18px;">Luke Skywalker · Progetto "Prove di Volo" · Sede Biblioteca Coruscant</div>
-          <div style="font-size:14px; line-height:1.7; color:#3a4047;">Nel corso del servizio, l'operatore volontario ha preso parte in modo continuativo alle attività previste dal progetto, operando in affiancamento all'OLP e al personale della sede. Di seguito le attività svolte, ricondotte alle Aree di Attività (ADA) del progetto.</div>
+          <div contentEditable="{{ editing }}" suppressContentEditableWarning="{{ true }}" style="{{ paraStyle }}">Nel corso del servizio, l'operatore volontario ha preso parte in modo continuativo alle attività previste dal progetto, operando in affiancamento all'OLP e al personale della sede. Di seguito le attività svolte, ricondotte alle Aree di Attività (ADA) del progetto.</div>
           <div style="margin-top:18px; display:flex; flex-direction:column; gap:16px;">
             <sc-for list="{{ adaBlocks }}" as="b" hint-placeholder-count="3">
               <div>
                 <div style="font-size:14px; font-weight:700; margin-bottom:5px; color:#2a2f35;">{{ b.title }}</div>
-                <div style="font-size:13.5px; line-height:1.65; color:#56606a;">{{ b.body }}</div>
+                <div contentEditable="{{ editing }}" suppressContentEditableWarning="{{ true }}" style="{{ bodyStyle }}">{{ b.body }}</div>
               </div>
             </sc-for>
           </div>
@@ -130,7 +150,7 @@
 
       <!-- ATTESTATO SPECIFICO -->
       <sc-if value="{{ showAttDoc }}" hint-placeholder-val="{{ false }}">
-        <div style="border:1px solid #e6edf2; border-radius:10px; padding:28px 30px; background:#fff; box-shadow:inset 0 0 0 1px #f4f6f8;">
+        <div style="{{ paperStyle }}">
           <div style="font-size:11px; font-weight:700; letter-spacing:.08em; color:#9aa0a7; margin-bottom:6px;">SERVIZIO CIVILE UNIVERSALE</div>
           <div style="font-size:19px; font-weight:800; letter-spacing:-.01em; margin-bottom:4px;">Attestato Specifico</div>
           <div style="font-size:13px; color:#8a9099; margin-bottom:20px;">Luke Skywalker · Progetto "Prove di Volo" · Sede Biblioteca Coruscant</div>
@@ -138,7 +158,7 @@
             <sc-for list="{{ attBlocks }}" as="b" hint-placeholder-count="3">
               <div>
                 <div style="font-size:12px; font-weight:700; letter-spacing:.05em; color:#34a0f3; margin-bottom:6px;">{{ b.title }}</div>
-                <div style="font-size:13.5px; line-height:1.7; color:#3a4047;">{{ b.body }}</div>
+                <div contentEditable="{{ editing }}" suppressContentEditableWarning="{{ true }}" style="{{ attBodyStyle }}">{{ b.body }}</div>
               </div>
             </sc-for>
           </div>
@@ -152,7 +172,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 760, &quot;height&quot;: 620}, &quot;view&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;doc&quot;, &quot;ada&quot;], &quot;default&quot;: &quot;doc&quot;, &quot;tsType&quot;: &quot;string&quot;}, &quot;role&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;admin&quot;, &quot;vol&quot;], &quot;default&quot;: &quot;vol&quot;, &quot;tsType&quot;: &quot;string&quot;}, &quot;aiEnabled&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;}, &quot;assistantName&quot;: {&quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;Pasquale&quot;, &quot;tsType&quot;: &quot;string&quot;}}">
 class Component extends DCLogic {
-  state = { generating: false, generated: false, docType: 'tra' };
+  state = { generating: false, generated: false, docType: 'tra', editing: false };
   componentWillUnmount() { clearTimeout(this._t); }
   renderVals() {
     const p = this.props || {};
@@ -187,6 +207,9 @@ class Component extends DCLogic {
     const tabBase = 'border:none; font-size:13px; font-weight:600; padding:8px 16px; border-radius:7px; cursor:pointer; ';
     const tabOn = tabBase + 'background:#fff; color:#1f5d8c; box-shadow:0 1px 3px rgba(0,0,0,.12);';
     const tabOff = tabBase + 'background:transparent; color:#6b747d;';
+    const editing = isAdmin && !!st.editing;
+    const editBox = editing ? 'outline:1px dashed #d9c48a; outline-offset:4px; border-radius:3px; background:#fffdf6;' : '';
+    const paperStyle = 'border:1px solid #e6edf2; border-radius:10px; padding:28px 30px; background:#fff; box-shadow:inset 0 0 0 1px #f4f6f8;' + (editing ? ' border-color:#e5d6ab;' : '');
     return {
       isAda: view === 'ada',
       isDoc: view !== 'ada',
@@ -205,6 +228,16 @@ class Component extends DCLogic {
       attTabStyle: docType === 'att' ? tabOn : tabOff,
       pickTra: () => this.setState({ docType: 'tra' }),
       pickAtt: () => this.setState({ docType: 'att' }),
+      editing: editing,
+      canEdit: isAdmin,
+      toggleEdit: () => this.setState(s => ({ editing: !s.editing })),
+      editBtnLabel: editing ? 'Salva modifiche' : 'Modifica testo',
+      editBtnIcon: editing ? 'tabler:check' : 'tabler:pencil',
+      editBtnStyle: 'display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:600; padding:8px 15px; border-radius:8px; cursor:pointer; ' + (editing ? 'border:1px solid #1c8f5a; background:#1c8f5a; color:#fff;' : 'border:1px solid #dde2e7; background:#fff; color:#2a2f35;'),
+      paperStyle: paperStyle,
+      paraStyle: 'font-size:14px; line-height:1.7; color:#3a4047;' + editBox,
+      bodyStyle: 'font-size:13.5px; line-height:1.65; color:#56606a;' + editBox,
+      attBodyStyle: 'font-size:13.5px; line-height:1.7; color:#3a4047;' + editBox,
       generating: st.generating,
       genIdle: !st.generating,
       showGenerateCta: isAdmin && !st.generated,
